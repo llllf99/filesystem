@@ -1,4 +1,5 @@
 
+
 from mcp.server.fastmcp import FastMCP
 
 import tools
@@ -9,7 +10,6 @@ from core.types import BaseTool
 
 # Define the MCP server
 server = FastMCP(name="file-reader-server", version="1.0.0")
-
 
 def register_tools():
     tools_list: list[BaseTool]   = [
