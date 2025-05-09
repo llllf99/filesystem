@@ -1,0 +1,34 @@
+[project]
+name = "filesystem"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "mcp[cli]>=1.7.0",
+]
+
+[dependency-groups]
+dev = [
+    "pyright>=1.1.400",
+    "pytest>=8.3.5",
+    "ruff>=0.11.8",
+]
+
+[tool.pyright]
+include = ["src/mcp", "tests"]
+venvPath = "."
+venv = ".venv"
+strict = ["src/mcp/**/*.py"]
+
+[tool.ruff.lint]
+select = ["C4", "E", "F", "I", "PERF", "UP"]
+ignore = ["PERF203"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py310"
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]
+"tests/server/fastmcp/test_func_metadata.py" = ["E501"]
