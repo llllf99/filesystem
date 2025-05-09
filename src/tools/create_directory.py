@@ -32,5 +32,7 @@ class ReadFileTool(BaseTool):
 
     def _entrypoint(self, input: CreateDirectoryinput) -> TextContent:
         os.makedirs(input.path, exist_ok=True)
-        return TextContent(type="text", text=f"Directory created successfully at {input.path}")
-   
+        return TextContent(
+            type="text", 
+            text=f"Directory created successfully at {input.path}",
+        )
