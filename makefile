@@ -1,2 +1,2 @@
 lint:
-	ruff check src --fix
+	uvx ruff check ./src --fix
