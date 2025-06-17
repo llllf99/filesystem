@@ -22,7 +22,7 @@ TOOL_DESCRIPTION = f"""
     @Schema: {CreateDirectoryinput.model_json_schema()}
 """
 
-class ReadFileTool(BaseTool):
+class CreateDirectoryTool(BaseTool):
     def __init__(self):
         super().__init__(
             inputSchema=CreateDirectoryinput.model_json_schema(),

@@ -17,6 +17,7 @@ def register_tools():
         tools.ReadMultipleFilesTool(),
         tools.WriteFileTool(),
         tools.EditFileTool(),
+        tools.CreateDirectoryTool()
     ]
     for tool in tools_list:
         server.add_tool(
