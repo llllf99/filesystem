@@ -7,8 +7,9 @@ from core.enums import FileSystemTools
 from core.types import BaseTool
 
 
-class CreateDirectoryinput(BaseModel):
+class CreateDirectoryInput(BaseModel):
     path: str
+
 
 TOOL_DESCRIPTION = f"""
     Create a new directory or ensure a directory exists. Can create multiple
@@ -18,21 +19,22 @@ TOOL_DESCRIPTION = f"""
     @Input:
         input: The path to the file to read.
     @Output:
-        text: The content of the file.
-    @Schema: {CreateDirectoryinput.model_json_schema()}
+        text: Success or error message .
+    @Schema: {CreateDirectoryInput.model_json_schema()}
 """
+
 
 class CreateDirectoryTool(BaseTool):
     def __init__(self):
         super().__init__(
-            inputSchema=CreateDirectoryinput.model_json_schema(),
+            inputSchema=CreateDirectoryInput.model_json_schema(),
             name=FileSystemTools.CREATE_DIRECTORY.value,
             description=TOOL_DESCRIPTION,
         )
 
-    def _entrypoint(self, input: CreateDirectoryinput) -> TextContent:
+    def _entrypoint(self, input: CreateDirectoryInput) -> TextContent:
         os.makedirs(input.path, exist_ok=True)
         return TextContent(
-            type="text", 
+            type="text",
             text=f"Directory created successfully at {input.path}",
         )
