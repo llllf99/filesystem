@@ -14,3 +14,5 @@ class FileSystemTools(Enum):
     LIST_DIRECTORY = "list_directory"
     LIST_DIRECTORY_WITH_SIZE = "list_directory_with_size"
     DIRECTORY_TREE = "directory_tree"
+    MOVE_FILE = "move_file"
+    SEARCH_FILES = "search_files"
