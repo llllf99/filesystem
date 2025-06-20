@@ -5,9 +5,6 @@ from mcp.server.fastmcp import FastMCP
 import tools
 from core.types import BaseTool
 
-# Define the input schema using Pydantic
-
-
 # Define the MCP server
 server = FastMCP(name="file-reader-server", version="1.0.0")
 
@@ -19,7 +16,8 @@ def register_tools():
         tools.EditFileTool(),
         tools.CreateDirectoryTool(),
         tools.ListDirectoryTool(),
-        tools.ListDirectoryWithSizeTool()
+        tools.ListDirectoryWithSizeTool(),
+        tools.DirectoryTreeTool(),
     ]
     for tool in tools_list:
         server.add_tool(
