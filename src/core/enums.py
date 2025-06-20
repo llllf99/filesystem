@@ -13,3 +13,4 @@ class FileSystemTools(Enum):
     CREATE_DIRECTORY = "create_directory"
     LIST_DIRECTORY = "list_directory"
     LIST_DIRECTORY_WITH_SIZE = "list_directory_with_size"
+    DIRECTORY_TREE = "directory_tree"
