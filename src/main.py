@@ -18,6 +18,8 @@ def register_tools():
         tools.ListDirectoryTool(),
         tools.ListDirectoryWithSizeTool(),
         tools.DirectoryTreeTool(),
+        tools.MoveFileTool(),
+        tools.SearchFilesTool(),
     ]
     for tool in tools_list:
         server.add_tool(
