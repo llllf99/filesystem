@@ -1,16 +1,12 @@
-import os
-from typing import Annotated
-
 from mcp.types import TextContent
-from pydantic import AfterValidator, BaseModel
+from pydantic import BaseModel
 
+from core.config import ServerConfig
 from core.enums import FileSystemTools
 from core.types import BaseTool
-from core.validations import validate_path
 
 
-class ListDirectoryInput(BaseModel):
-    path: Annotated[str, AfterValidator(validate_path)]
+class GetAllowedPathsInput(BaseModel): ...
 
 
 TOOL_DESCRIPTION = f"""
@@ -22,25 +18,22 @@ TOOL_DESCRIPTION = f"""
         path: The path to the file to read.
     @Output:
         text: text with list of files/dir names.
-    @Schema: {ListDirectoryInput.model_json_schema()}
+    @Schema: {GetAllowedPathsInput.model_json_schema()}
 """
 
 
-class ListDirectoryTool(BaseTool):
+class GetAllowedPathsTool(BaseTool):
     def __init__(self):
         super().__init__(
-            inputSchema=ListDirectoryInput.model_json_schema(),
-            name=FileSystemTools.LIST_DIRECTORY.value,
+            inputSchema=GetAllowedPathsInput.model_json_schema(),
+            name=FileSystemTools.GET_ALLOWED_PATHS.value,
             description=TOOL_DESCRIPTION,
         )
 
-    def _entrypoint(self, input: ListDirectoryInput) -> TextContent:
-        entries = os.scandir(input.path)
+    def _entrypoint(self, input: GetAllowedPathsInput) -> TextContent:
+        config = ServerConfig()
 
-        formatted = "\n".join(
-            f"[DIR] {entry.name}" if entry.is_dir() else f"[FILE] {entry.name}"
-            for entry in entries
-        )
+        formatted = "\n".join(config.get_allowed_paths())
 
         return TextContent(
             type="text",

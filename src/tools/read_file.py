@@ -1,12 +1,15 @@
+from typing import Annotated
+
 from mcp.types import TextContent
-from pydantic import BaseModel
+from pydantic import AfterValidator, BaseModel
 
 from core.enums import FileSystemTools
 from core.types import BaseTool
+from core.validations import validate_path
 
 
 class ReadFileInput(BaseModel):
-    path: str
+    path: Annotated[str, AfterValidator(validate_path)]
 
 TOOL_DESCRIPTION = f"""
     Reads a file from the filesystem and returns its content.

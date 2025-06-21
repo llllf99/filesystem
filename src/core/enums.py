@@ -16,3 +16,5 @@ class FileSystemTools(Enum):
     DIRECTORY_TREE = "directory_tree"
     MOVE_FILE = "move_file"
     SEARCH_FILES = "search_files"
+    GET_FILE_INFO = "get_file_info"
+    GET_ALLOWED_PATHS = "get_allowed_paths"

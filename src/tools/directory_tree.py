@@ -1,15 +1,17 @@
 import json
 import os
+from typing import Annotated
 
 from mcp.types import TextContent
-from pydantic import BaseModel
+from pydantic import AfterValidator, BaseModel
 
 from core.enums import FileSystemTools
 from core.types import BaseTool
+from core.validations import validate_path
 
 
 class DirectoryTreeInput(BaseModel):
-    path: str
+    path: Annotated[str, AfterValidator(validate_path)]
 
 
 class TreeEntry(BaseModel):

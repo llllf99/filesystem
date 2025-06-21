@@ -1,12 +1,14 @@
 import difflib
 import re
+from typing import Annotated
 
 from mcp.types import TextContent
-from pydantic import BaseModel, Field
+from pydantic import AfterValidator, BaseModel, Field
 
 from core.enums import FileSystemTools
 from core.formatters import normalize_line_endings
 from core.types import BaseTool
+from core.validations import validate_path
 
 
 class EditOperation(BaseModel):
@@ -23,7 +25,7 @@ class EditOperation(BaseModel):
 
 
 class EditFileInput(BaseModel):
-    path: str
+    path: Annotated[str, AfterValidator(validate_path)]
     edits: list[EditOperation]
     dry_run: bool = Field(
         description="Preview changes using git-style diff format",

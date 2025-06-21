@@ -1,12 +1,14 @@
 import datetime
 import os
 from enum import Enum
+from typing import Annotated
 
 from mcp.types import TextContent
-from pydantic import BaseModel
+from pydantic import AfterValidator, BaseModel
 
 from core.enums import FileSystemTools
 from core.types import BaseTool
+from core.validations import validate_path
 
 
 class SortByEnum(str, Enum):
@@ -15,7 +17,7 @@ class SortByEnum(str, Enum):
 
 
 class ListDirectoryWithSizeInput(BaseModel):
-    path: str
+    path: Annotated[str, AfterValidator(validate_path)]
     sort_by: SortByEnum = SortByEnum.file_name
 
 
@@ -28,7 +30,7 @@ TOOL_DESCRIPTION = f"""
         path: The path to the file to read.
         sort_by: string literal to file_name or size
     @Output:
-        text: with sorted dir/files names plus sumary.
+        text: with sorted dir/files names plus summary.
     @Schema: {ListDirectoryWithSizeInput.model_json_schema()}
 """
 
