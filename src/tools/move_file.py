@@ -1,15 +1,22 @@
 import os
+from typing import Annotated
 
 from mcp.types import TextContent
-from pydantic import BaseModel
+from pydantic import AfterValidator, BaseModel
 
 from core.enums import FileSystemTools
 from core.types import BaseTool
+from core.validations import validate_path
 
 
 class MoveFileInput(BaseModel):
-    source: str
-    destination: str
+    source: Annotated[str, AfterValidator(validate_path)]
+    destination: Annotated[
+        str, 
+        AfterValidator(
+            lambda path: validate_path(path=path,validate_parent=True)
+        ),
+    ]
 
 
 TOOL_DESCRIPTION = f"""

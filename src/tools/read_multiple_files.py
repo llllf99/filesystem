@@ -3,6 +3,7 @@ from pydantic import BaseModel
 
 from core.enums import FileSystemTools
 from core.types import BaseTool
+from core.validations import validate_path
 
 
 class ReadMultipleFilesInput(BaseModel):
@@ -34,7 +35,8 @@ class ReadMultipleFilesTool(BaseTool):
 
     def _read_file(self, path: str) -> TextContent:
         try:
-            with open(path, encoding="utf-8") as file:
+            valid_path = validate_path(path)
+            with open(valid_path, encoding="utf-8") as file:
                 content = file.read()
             return TextContent(type="text", text=f"{path}:\n{content}")
         except Exception as e:

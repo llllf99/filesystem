@@ -1,15 +1,17 @@
 import os
 from fnmatch import fnmatch
+from typing import Annotated
 
 from mcp.types import TextContent
-from pydantic import BaseModel
+from pydantic import AfterValidator, BaseModel
 
 from core.enums import FileSystemTools
 from core.types import BaseTool
+from core.validations import validate_path
 
 
 class SearchFilesInput(BaseModel):
-    path: str
+    path: Annotated[str, AfterValidator(validate_path)]
     pattern: str
     exclude_patterns: list[str] = []
 

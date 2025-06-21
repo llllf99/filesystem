@@ -1,12 +1,20 @@
+from typing import Annotated
+
 from mcp.types import TextContent
-from pydantic import BaseModel
+from pydantic import AfterValidator, BaseModel
 
 from core.enums import FileSystemTools
 from core.types import BaseTool
+from core.validations import validate_path
 
 
 class WriteFileInput(BaseModel):
-    path: str
+    path: Annotated[
+        str, 
+        AfterValidator(
+            lambda path: validate_path(path=path, validate_parent=True)
+        ),
+    ]
     content: str
 
 
