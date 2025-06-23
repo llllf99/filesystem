@@ -96,3 +96,80 @@ Python server implementing Model Context Protocol (MCP) for filesystem operation
   - No input required
   - Returns:
     - Directories that this server can read/write from
+
+## Installation
+
+### git + Python
+
+```bash
+# Clone the repository
+git clone https://github.com/MarcusJellinghaus/mcp_server_filesystem
+cd filesystem
+
+# Create and activate a virtual environment (optional but recommended)
+python -m venv .venv
+source .venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install dependencies using pip with pyproject.toml
+pip install -e .
+
+```
+
+
+## Running the Server
+
+Previous instal required
+
+```bash
+# Enable virtual env 
+source .venv/bin/activate 
+# Run server with allowed paths (paths optional but recommended)
+python ./src/main.py  /path/to/home /path/to/project
+```
+
+Alternatively, you can use uvx to run directly from GH repo
+uv required https://docs.astral.sh/uv/getting-started/installation/
+
+```bash
+uvx --from git+https://github.com/javillegasna/filesystem /Users/username/Desktop
+```
+
+## Usage with Different Platforms
+
+### Claude Desktop
+```json
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "git+https://github.com/javillegasna/filesystem",
+        "/Users/username/Desktop",
+        "/path/to/other/allowed/dir",
+      ]
+    }
+  }
+}
+
+```
+
+### vscode
+```json
+{
+  "mcp": {
+    "servers": {
+      "filesystem": {
+        "command": "uvx",
+        "args": [
+        "--from",
+        "git+https://github.com/javillegasna/filesystem",
+        "/Users/username/Desktop",
+        "/path/to/other/allowed/dir",
+      ]
+      }
+    }
+  }
+}
+```
+
