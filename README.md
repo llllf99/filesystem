@@ -131,7 +131,7 @@ Alternatively, you can use uvx to run directly from GH repo
 uv required https://docs.astral.sh/uv/getting-started/installation/
 
 ```bash
-uvx --from git+https://github.com/javillegasna/filesystem /Users/username/Desktop
+uvx --from git+https://github.com/javillegasna/filesystem filesystem /Users/username/Desktop
 ```
 
 ## Usage with Different Platforms
@@ -145,6 +145,7 @@ uvx --from git+https://github.com/javillegasna/filesystem /Users/username/Deskto
       "args": [
         "--from",
         "git+https://github.com/javillegasna/filesystem",
+        "filesystem",
         "/Users/username/Desktop",
         "/path/to/other/allowed/dir",
       ]
@@ -164,6 +165,7 @@ uvx --from git+https://github.com/javillegasna/filesystem /Users/username/Deskto
         "args": [
         "--from",
         "git+https://github.com/javillegasna/filesystem",
+        "filesystem",
         "/Users/username/Desktop",
         "/path/to/other/allowed/dir",
       ]
