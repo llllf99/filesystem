@@ -49,11 +49,13 @@ def register_tools():
             description=tool.description,
         )
 
-
-
-if __name__ == "__main__":
+def main():
     # initialize server config
     config_server()
     # Register tools
     register_tools()
     server.run()
+
+
+if __name__ == "__main__":
+    main()
