@@ -2,7 +2,7 @@ import difflib
 from typing import Annotated
 
 from mcp.types import TextContent
-from pydantic import AfterValidator, BaseModel, Field
+from pydantic import AfterValidator, BaseModel, Field, ConfigDict
 
 from core.enums import FileSystemTools
 from core.formatters import get_line_indentation, normalize_line_endings
@@ -21,6 +21,8 @@ class EditOperation(BaseModel):
         min_length=1,
         max_length=1000,
     )
+    model_config = ConfigDict(title="EditOperation")
+
 
 
 class EditOptions(BaseModel):
@@ -36,6 +38,8 @@ class EditFileInput(BaseModel):
         default=False,
     )
     options: EditOptions = EditOptions()
+    model_config = ConfigDict(title="EditFileInput")
+
 
 
 class MatchResult(BaseModel):
